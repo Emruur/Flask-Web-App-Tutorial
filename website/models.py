@@ -10,6 +10,8 @@ class User(db.Model, UserMixin):
     notes= db.relationship("Note")
 
     def __init__ (self, email, name, password):
+        super().__init__()
+
         self.email= email
         self.name= name
         self.password= password
@@ -23,6 +25,11 @@ class Note(db.Model):
     note= db.Column(db.String(1500))
     date= db.Column(db.DateTime(timezone= True),default= func.now())
     user_id= db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self,note) -> None:
+        super().__init__()
+
+        self.note= note
     
 
 
